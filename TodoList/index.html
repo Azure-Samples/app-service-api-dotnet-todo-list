@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+            font-family: "Segoe UI";
+        }
+
+        h1, h2, h3 {
+            font-family: "Segoe UI Light";
+        }
+
+        .btn-sm {
+            width: 80px;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="todoListCtrl">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" target="_blank" href="http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/">Azure API Apps</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Todo List API HTML Client</a></li>
+                    <li><a href="/swagger">Swagger UI</a></li>
+                    <li><a href="/swagger/docs/v1">Swagger JSON</a></li>
+                    <li><a href="#" onclick="generate()">Generate C# Client</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Todo List</h2>
+            </div>
+            <div class="col-lg-4">
+                <h2>Swagger Metadata</h2>
+            </div>
+            <div class="col-lg-4">
+                <h2>C# Client Generation</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>The Todo List API App is an ASP.NET Web API application that's been published as an Azure API App. This is a sample HTML client that communicates with a REST API hosted in Azure App Service.</p>
+            </div>
+            <div class="col-lg-4">
+                <p>Azure API Apps make use of <a href="http://swagger.io">Swagger</a> metadata to describe REST API endpoints. The Swagger UI link above will load an easy-to-use API test page. The Swagger JSON link above will load the Swagger metadata.</p>
+            </div>
+            <div class="col-lg-4">
+                <p>The Generate C# Client link above will use <a href="http://github.com/azure/autorest">AutoRest</a> to generate a C# client for this API App. To use this C# in your own Visual Studio project, install the <a href="https://www.nuget.org/packages/microsoft.rest.clientruntime">AutoRest Client Runtime</a> NuGet into your project and then import the generated files, and you can call this API App directly from almost any C# project.</p>
+            </div>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Todo</th>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="todo in todos">
+                        <td>{{todo.Content}}</td>
+                        <td colspan="2"><button class="btn btn-sm btn-warning" ng-click="delete(todo.Id)">Delete</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Create a new Todo Item</th>
+                        <th><button class="btn btn-sm btn-info" ng-click="refresh()">Refresh</button></th>
+                        <th>API Status: {{status}}</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="My thing to do" ng-model="newContent" /></td>
+                        <td><button class="btn btn-sm btn-success" ng-click="create()">Create</button></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="dataForm" style="display: hidden;">
+        <form id="makeCode" action="https://autorestapi.azurewebsites.net/generate" method="POST">
+            <input type="hidden" name="CodeGenerator" value="CSharp" />
+            <input type="hidden" name="Modeler" value="Swagger" />
+            <input type="hidden" name="Input" id="swaggerUrl" />
+            <input type="hidden" name="Namespace" value="TodoListApi" />
+            <input type="hidden" name="ClientName" value="TodoListApiClient" />
+            <input type="hidden" name="Header" value="This code was generated by AutoRest" />
+            <input type="hidden" name="AddCredentials" value="false" />
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        function generate() {
+            document.getElementById("swaggerUrl").value = window.location.protocol + '//' + window.location.hostname + '/swagger/docs/v1';
+            document.getElementById("makeCode").submit();
+        };
+    </script>
+    <script src="Scripts/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('myApp', []).controller('todoListCtrl', function ($scope, $http) {
+
+            $scope.refresh = function () {
+                $scope.status = "Refreshing Todos...";
+                $http({
+                    method: 'GET',
+                    url: '/todos',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).success(function (data) {
+                    $scope.todos = data;
+                    $scope.status = "Todos loaded";
+                }).error(function (data, status) {
+                    $scope.status = "Error loading todos";
+                });
+            };
+
+            $scope.create = function () {
+                $scope.status = "Creating a new todo";
+
+                $http({
+                    method: 'POST',
+                    url: '/todos',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        'Content': $scope.newContent
+                    }
+                }).success(function (data) {
+                    $scope.status = "Todo created";
+                    $scope.refresh();
+                    $scope.newContent = '';
+                });
+            };
+
+            $scope.delete = function (id) {
+                $scope.status = "Deleting Todo";
+                $http({
+                    method: 'DELETE',
+                    url: '/todos/' + id
+                }).success(function (data) {
+                    $scope.status = "Todo deleted";
+                    $scope.refresh();
+                });
+            };
+
+            $scope.refresh();
+        });
+    </script>
+</body>
+</html>
