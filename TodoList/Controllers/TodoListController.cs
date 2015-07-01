@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Swashbuckle.Swagger.Annotations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -43,25 +44,48 @@ namespace TodoList.Controllers
             _storage = new GenericStorage();
         }
 
+        /// <summary>
+        /// Gets the list of todo items
+        /// </summary>
+        /// <returns>Todos</returns>
         [HttpGet]
-        [ResponseType(typeof(IEnumerable<TodoListItem>))]
         [Route("todos")]
+        [SwaggerResponse(HttpStatusCode.OK,
+            Type = typeof(IEnumerable<TodoListItem>))]
         public async Task<IEnumerable<TodoListItem>> Get()
         {
             return await GetTodos();
         }
 
+        /// <summary>
+        /// Gets a specific todo item
+        /// </summary>
+        /// <param name="id">The todo item's identifier</param>
+        /// <returns>The requested todo item</returns>
         [HttpGet]
-        [ResponseType(typeof(TodoListItem))]
+        [SwaggerResponse(HttpStatusCode.OK,
+            Description = "OK",
+            Type = typeof(TodoListItem))]
+        [SwaggerResponse(HttpStatusCode.NotFound,
+            Description = "Todo not found",
+            Type = typeof(IEnumerable<TodoListItem>))]
+        [SwaggerOperation("GetTodoById")]
         [Route("todos/{id}")]
-        public async Task<TodoListItem> GetById([FromUri] string id)
+        public async Task<TodoListItem> Get([FromUri] string id)
         {
             var todos = await GetTodos();
             return todos.FirstOrDefault(x => x.Id == id);
         }
 
+        /// <summary>
+        /// Create a new todo item
+        /// </summary>
+        /// <param name="todoItem">The todo</param>
+        /// <returns>The newly-saved todo</returns>
         [HttpPost]
-        [ResponseType(typeof(TodoListItem))]
+        [SwaggerResponse(HttpStatusCode.Created,
+            Description = "Created",
+            Type = typeof(TodoListItem))]
         [Route("todos")]
         public async Task<TodoListItem> Post([FromBody] TodoListItem todoItem)
         {
@@ -73,8 +97,18 @@ namespace TodoList.Controllers
             return todoItem;
         }
 
+        /// <summary>
+        /// Deletes a todo item
+        /// </summary>
+        /// <param name="id">The identifier of the todo item</param>
+        /// <returns>True if the todo was deleted</returns>
         [HttpDelete]
-        [ResponseType(typeof(bool))]
+        [SwaggerResponse(HttpStatusCode.OK,
+            Description = "OK",
+            Type = typeof(bool))]
+        [SwaggerResponse(HttpStatusCode.NotFound,
+            Description = "Todo not found",
+            Type = typeof(bool))]
         [Route("todos/{id}")]
         public async Task<bool> Delete([FromUri] string id)
         {
