@@ -49,7 +49,7 @@ namespace TodoList.Controllers
         /// </summary>
         /// <returns>Todos</returns>
         [HttpGet]
-        [Route("todos")]
+        [Route("~/")]
         [SwaggerResponse(HttpStatusCode.OK,
             Type = typeof(IEnumerable<TodoListItem>))]
         public async Task<IEnumerable<TodoListItem>> Get()
@@ -70,7 +70,7 @@ namespace TodoList.Controllers
             Description = "Todo not found",
             Type = typeof(IEnumerable<TodoListItem>))]
         [SwaggerOperation("GetTodoById")]
-        [Route("todos/{id}")]
+        [Route("~/{id}")]
         public async Task<TodoListItem> Get([FromUri] string id)
         {
             var todos = await GetTodos();
@@ -86,7 +86,7 @@ namespace TodoList.Controllers
         [SwaggerResponse(HttpStatusCode.Created,
             Description = "Created",
             Type = typeof(TodoListItem))]
-        [Route("todos")]
+        [Route("~/")]
         public async Task<TodoListItem> Post([FromBody] TodoListItem todoItem)
         {
             var todos = await GetTodos();
@@ -109,7 +109,7 @@ namespace TodoList.Controllers
         [SwaggerResponse(HttpStatusCode.NotFound,
             Description = "Todo not found",
             Type = typeof(bool))]
-        [Route("todos/{id}")]
+        [Route("~/{id}")]
         public async Task<bool> Delete([FromUri] string id)
         {
             var todos = await GetTodos();
