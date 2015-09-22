@@ -1,3 +1,9 @@
+---
+services: app-service\api
+platforms: dotnet
+author: bradygaster
+---
+
 # Todo List Azure API App Sample #
 
 This is a simple example of how to build an [API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") for deployment into the Azure App Service. This example API App uses a Web API back end and a simple HTML/AngularJS client to communicate with the API. 
