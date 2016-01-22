@@ -37,15 +37,14 @@ angular.module('todoApp', ['ngRoute'])
 //    }).otherwise({ redirectTo: "/Home" });
 
 //    var endpoints = {
-//        "https://todolistapi0118.azurewebsites.net/": "e68ca76d-1922-4f40-8872-86e05cc7450c"
+//        "https://{middle tier API app name}.azurewebsites.net/": "{client ID of Azure AD app}"
 //    };
 
 //    adalProvider.init(
 //        {
 //            instance: 'https://login.microsoftonline.com/',
-//            tenant: 'tomdykstra.onmicrosoft.com',
-//            //clientId: '3271c206-5b87-4547-aea8-04177743474b',
-//            clientId: 'e68ca76d-1922-4f40-8872-86e05cc7450c',
+//            tenant: '{your tenant, e.g.: contoso.onmicrosoft.com}',
+//            clientId: '{client ID of Azure AD app}',
 //            extraQueryParameter: 'nux=1',
 //            endpoints: endpoints
 //            //cacheLocation: 'localStorage', // enable this for IE, as sessionStorage does not work for localhost.
