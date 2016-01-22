@@ -43,7 +43,7 @@ namespace ToDoListDataAPI.Controllers
         {
             CheckCallerId();
 
-            return mockData.Values.Where(m => m.Owner == owner || m.Owner == "*");
+            return mockData.Values.Where(m => m.Owner == owner || owner == "*");
         }
 
         // GET: api/ToDoItemList/5
@@ -51,7 +51,7 @@ namespace ToDoListDataAPI.Controllers
         {
             CheckCallerId();
 
-            return mockData.Values.Where(m => (m.Owner == owner || m.Owner == "*" ) && m.ID == id).First();
+            return mockData.Values.Where(m => (m.Owner == owner || owner == "*" ) && m.ID == id).First();
         }
 
         // POST: api/ToDoItemList
@@ -67,7 +67,7 @@ namespace ToDoListDataAPI.Controllers
         {
             CheckCallerId();
 
-            ToDoItem xtodo = mockData.Values.First(a => (a.Owner == todo.Owner || a.Owner == "*") && a.ID == todo.ID);
+            ToDoItem xtodo = mockData.Values.First(a => (a.Owner == todo.Owner || todo.Owner == "*") && a.ID == todo.ID);
             if (todo != null && xtodo != null)
             {
                 xtodo.Description = todo.Description;
@@ -79,7 +79,7 @@ namespace ToDoListDataAPI.Controllers
         {
             CheckCallerId();
 
-            ToDoItem todo = mockData.Values.First(a => (a.Owner == owner || a.Owner == "*") && a.ID == id);
+            ToDoItem todo = mockData.Values.First(a => (a.Owner == owner || owner == "*") && a.ID == id);
             if (todo != null)
             {
                 mockData.Remove(todo.ID);

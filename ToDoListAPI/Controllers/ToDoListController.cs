@@ -35,7 +35,7 @@ namespace ToDoListAPI.Controllers
     [HttpOperationExceptionFilterAttribute]
     public class ToDoListController : ApiController
     {
-        private string _owner = "*";
+        private string owner = "*";
 
         private static ToDoListDataAPI NewDataAPIClient()
         {
@@ -52,7 +52,7 @@ namespace ToDoListAPI.Controllers
             //_owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
             using (var client = NewDataAPIClient())
             {
-                var results = await client.ToDoList.GetByOwnerAsync(_owner);
+                var results = await client.ToDoList.GetByOwnerAsync(owner);
                 return results.Select(m => new ToDoItem
                 {
                     Description = m.Description,
@@ -68,7 +68,7 @@ namespace ToDoListAPI.Controllers
             //_owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
             using (var client = NewDataAPIClient())
             {
-                var result = await client.ToDoList.GetByIdByOwnerAndIdAsync(_owner, id);
+                var result = await client.ToDoList.GetByIdByOwnerAndIdAsync(owner, id);
                 return new ToDoItem
                 {
                     Description = result.Description,
@@ -82,7 +82,7 @@ namespace ToDoListAPI.Controllers
         public async Task Post(ToDoItem todo)
         {
             //_string owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
-            todo.Owner = _owner;
+            todo.Owner = owner;
             using (var client = NewDataAPIClient())
             {
                 await client.ToDoList.PostByTodoAsync(new ToDoItem
@@ -97,7 +97,7 @@ namespace ToDoListAPI.Controllers
         public async Task Put(ToDoItem todo)
         {
             //_owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
-            todo.Owner = _owner;
+            todo.Owner = owner;
             using (var client = NewDataAPIClient())
             {
                 await client.ToDoList.PutByTodoAsync(new ToDoItem
@@ -115,7 +115,7 @@ namespace ToDoListAPI.Controllers
             //_owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
             using (var client = NewDataAPIClient())
             {
-                await client.ToDoList.DeleteByOwnerAndIdAsync(_owner, id);
+                await client.ToDoList.DeleteByOwnerAndIdAsync(owner, id);
             }
         }
     }
