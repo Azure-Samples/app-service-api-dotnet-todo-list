@@ -1,8 +1,6 @@
 ﻿'use strict';
 angular.module('todoApp')
 .factory('todoListSvc', ['$http', function ($http) {
-    //var apiEndpoint = "https://{API app name}.azurewebsites.net";
-    var apiEndpoint = "http://localhost:46439";
 
     $http.defaults.useXDomain = true;
     delete $http.defaults.headers.common['X-Requested-With']; 
