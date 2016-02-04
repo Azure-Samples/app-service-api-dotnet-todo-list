@@ -111,7 +111,7 @@
     <Content Include="app\views\TodoList.html" />
     <Content Include="app\views\UserData.html" />
     <Content Include="favicon.ico" />
-    <None Include="index.cshtml" />
+    <Content Include="index.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
