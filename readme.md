@@ -6,15 +6,10 @@ author: bradygaster
 
 # Todo List Azure API App Sample #
 
-This is a simple example of how to build an [API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") for deployment into the Azure App Service. This example API App uses a Web API back end and a simple HTML/AngularJS client to communicate with the API. 
+This is a simple example that demonstrates how to build and consume [API apps](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") in Azure App Service. This example application uses a Web API middle tier API app, a Web API data tier API app, and an AngularJS client web app front end.  
 
-## More Information ##
-You can learn more about API Apps on the [Azure.com](http://azure.com "The Microsoft Azure Home Page") home page. This Todo List sample is similar to the [Contact List](https://github.com/Azure-Samples/API-Apps-DotNet-ContactList-Sample) API App Sample used throughout some of the articles outlining the process of creating, deploying, consuming, and debugging API Apps. Whereas the Contact List example goes further by providing a separate Web App that serves as a client to the API App back-end, this Todo List sample is self-contained, without a separate client Web App.  
+This sample is used in the [getting-started series of tutorials for API apps](http://azure.microsoft.com/documentation/articles/app-service-api-dotnet-get-started/). These tutorials show how to use API metadata, how to configure CORS, how to configure user authentication, and how to handle internal access using an Azure Active Directory service account.
 
-Helpful Links:
-- [API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?")
-- [Create an API App in Azure App Service](http://azure.microsoft.com/en-us/documentation/articles/app-service-dotnet-create-api-app/)
-- [Convert an Existing API to an API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-dotnet-create-api-app-visual-studio/)
-- [Remotely Debug an API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-dotnet-remotely-debug-api-app/)
-- [Protect an API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-dotnet-add-authentication/)
-- [Deploy an API App in App Service](http://azure.microsoft.com/en-us/documentation/articles/app-service-dotnet-deploy-api-app/)
+To deploy the application to your Azure subscription without following the tutorial, use the **Deploy to Azure** button.
+
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
