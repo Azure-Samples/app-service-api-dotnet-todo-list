@@ -6,12 +6,10 @@ author: bradygaster
 
 # To Do List Azure API App Sample #
 
-This is a simple example of how to build an [API App](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") for deployment into the Azure App Service. This example API App uses a Web API middle tier, a Web API data tier, and an AngularJS client to communicate with the API. 
+This is a simple example that demonstrates how to build and consume [API apps](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") in Azure App Service. This example application uses a Web API middle tier API app, a Web API data tier API app, and an AngularJS client web app front end.  
 
-## More Information ##
-You can learn more about API Apps on the [Azure.com](http://azure.com "The Microsoft Azure Home Page") home page. This To Do List sample is used in some of the articles that explain how to create, deploy, and consume API apps. 
+This sample is used in the [getting-started series of tutorials for API apps](http://azure.microsoft.com/documentation/articles/app-service-api-dotnet-get-started/). These tutorials show how to use API metadata, how to configure CORS, how to configure user authentication, and how to handle internal access using an Azure Active Directory service account.
 
-Helpful Links:
-- [What are API apps](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?")
-- [Get started with API Apps in Azure App Service](http://azure.microsoft.com/en-us/documentation/articles/app-service-dotnet-get-started/)
+To deploy the application to your Azure subscription without following the tutorial, use the **Deploy to Azure** button.
 
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
