@@ -4,7 +4,7 @@ platforms: dotnet
 author: bradygaster
 ---
 
-# Todo List Azure API App Sample #
+# To Do List Azure API App Sample #
 
 This is a simple example that demonstrates how to build and consume [API apps](http://azure.microsoft.com/en-us/documentation/articles/app-service-api-apps-why-best-platform/ "What are API Apps?") in Azure App Service. This example application uses a Web API middle tier API app, a Web API data tier API app, and an AngularJS client web app front end.  
 
