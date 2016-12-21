@@ -39,6 +39,7 @@ namespace ToDoListDataAPI.Controllers
         }
 
         // GET: api/ToDoItemList
+        [ClientCertificateHeaderInfo]
         public IEnumerable<ToDoItem> Get(string owner)
         {
             CheckCallerId();
